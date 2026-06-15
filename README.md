@@ -134,3 +134,60 @@ Workflow failid asuvad:
 ```
 
 ---
+
+## Etapp 5 — Arhitektuuri analüüs
+
+### Mis arhitektuur see rakendus kasutab?
+
+Rakendus kasutab **monoliitset klient-server arhitektuuri**, millel on **lihtsustatud MVC-laadne struktuur**.
+
+---
+
+### Millest see järeldub?
+
+Seda saab järeldada projekti struktuurist:
+
+- kõik API loogikad on ühes Node.js/Express rakenduses
+- eraldi teenuseid ei ole (nt ei ole microservices’e)
+- kõik route’id on ühes projektis:
+  - `users.js`
+  - `products.js`
+  - `orders.js`
+- andmed tulevad ühest `data` moodulist (in-memory storage)
+
+Seega kogu süsteem töötab ühe serveri sees.
+
+---
+
+### Miks see arhitektuur on siin õige valik?
+
+See arhitektuur sobib, sest:
+
+- lihtne arendada ja mõista
+- kiire seadistada ja testida
+- sobib väikese või õppeprojekti jaoks
+- ei vaja keerulist infrastruktuuri
+- kõik komponendid on ühes kohas hallatavad
+
+---
+
+### Mis arhitektuuri kasutaksid 1 miljoni kasutaja puhul?
+
+Sellisel juhul kasutaksin **mikroteenuste arhitektuuri**.
+
+Süsteem jagataks eraldi teenusteks:
+
+- kasutajate teenus (User Service)
+- toodete teenus (Product Service)
+- tellimuste teenus (Order Service)
+- maksete teenus (Payment Service)
+- otsingu teenus (Search Service)
+
+---
+
+### Miks mikroteenused?
+
+- parem skaleeritavus (iga teenust saab eraldi skaleerida)
+- parem töökindlus (üks teenus võib kukkuda, teised töötavad edasi)
+- lihtsam hallata suuri süsteeme ja tiime
+- võimaldab kasutada erinevaid tehnoloogiaid eri teenustes
