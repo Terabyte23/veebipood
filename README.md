@@ -106,14 +106,25 @@ Rakenduses on kaks viga mida pead parandama:
 ## Arhitektuur
 
 ```text
-src/
-├── routes/
-│   ├── users.js
-│   ├── products.js
-│   └── orders.js
-├── models/
-├── middleware/
-└── app.js
+veebipood/
+├── public/
+│   ├── index.html
+│   └── style.css
+│
+├── src/
+│   ├── routes/
+│   │   ├── users.js
+│   │   ├── products.js
+│   │   └── orders.js
+│   │
+│   ├── data.js
+│   ├── server.js
+│   └── test.js
+│
+├── Dockerfile
+├── docker-compose.yml
+├── package.json
+└── README.md
 ```
 
 ## GitHub Actions
